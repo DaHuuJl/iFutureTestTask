@@ -1,0 +1,30 @@
+databaseChangeLog:
+
+  - changeSet:
+      id: 21.12.2022 - Add data to table CNT_ACCOUNT
+      author: Daniil Smirnov
+      changes:
+        - insert:
+            tableName: CNT_ACCOUNT
+            columns:
+              - column:
+                  name: BALANCE
+                  value: 0
+        - insert:
+            tableName: CNT_ACCOUNT
+            columns:
+              - column:
+                  name: BALANCE
+                  value: 250
+        - insert:
+            tableName: CNT_ACCOUNT
+            columns:
+              - column:
+                  name: BALANCE
+                  value: 100
+        - insert:
+            tableName: CNT_ACCOUNT
+            columns:
+              - column:
+                  name: BALANCE
+                  value: 150

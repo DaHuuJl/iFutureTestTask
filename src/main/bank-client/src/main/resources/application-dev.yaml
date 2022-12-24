@@ -1,0 +1,27 @@
+server:
+  port: 8761
+
+# Порт сервера
+bank:
+  server:
+    port: 8765
+
+# Чтобы явно задать quota для каждого потока, необходимо установить для client.thread.same.quota значение false
+# А затем указать значения для account.read.quota и account.write.quota через запятую
+# Количество значений должно быть равным количеству потоков (client.thread.count)
+account:
+  read:
+    list: 100, 101, 102, 103
+    quota: 0.75
+#    quota: 0.25, 0.75, 0.25, 0.75
+  write:
+    list: 100, 101, 102, 103
+    quota: 0.75
+#    quota: 0.75, 0.25, 0.75, 0.25
+
+client:
+  thread:
+    count: 4
+    same:
+      quota: true
+#      quota: false

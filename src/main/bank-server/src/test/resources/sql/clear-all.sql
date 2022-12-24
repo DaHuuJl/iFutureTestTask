@@ -1,0 +1,1 @@
+DELETE FROM cnt_account;

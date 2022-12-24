@@ -1,0 +1,15 @@
+databaseChangeLog:
+  - preConditions:
+      - dbms:
+          type: postgresql
+
+  - changeSet:
+      id: 15.09.2022 - Init database
+      author: Daniil Smirnov
+      tagDatabase:
+        tag: db_init
+
+  - include:
+      file: liquibase/1.0.0/changeset-1.0.0.yaml
+  - include:
+      file: liquibase/1.0.0/changeset-1.0.0-predefined.yaml

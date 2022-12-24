@@ -1,0 +1,22 @@
+server:
+  port: 8765
+
+# Время для расчётов в миллисекундах
+analytics:
+  time: 5000
+
+spring:
+  jpa:
+    database: postgresql
+    database-platform: org.hibernate.dialect.PostgreSQL9Dialect
+    hibernate:
+      ddl-auto: validate
+
+  datasource:
+    driver-class-name: org.postgresql.Driver
+    url: jdbc:postgresql://localhost:5432/ifuture_db
+    username: owner_ifuture_db
+    password: owner_ifuture_db
+
+  liquibase:
+    change-log: classpath:liquibase/changeset-master.yaml

@@ -1,0 +1,27 @@
+databaseChangeLog:
+  - changeSet:
+      id: 21.12.2022 - Create table CNT_ACCOUNT
+      author: Daniil Smirnov
+      changes:
+        - createSequence:
+            sequenceName: ACCOUNT_ID_SEQ
+            cycle: false
+            startValue: 100
+            incrementBy: 1
+        - createTable:
+            tableName: CNT_ACCOUNT
+            columns:
+              - column:
+                  name: ACCOUNT_ID
+                  type: java.lang.Long
+                  valueSequenceNext: nextval('ACCOUNT_ID_SEQ')
+                  defaultValue: nextval('ACCOUNT_ID_SEQ')
+                  constraints:
+                    nullable: false
+                    primaryKey: true
+                    primaryKeyName: ACCOUNT_PK
+              - column:
+                  name: BALANCE
+                  type: java.lang.Long
+                  constraints:
+                    nullable: false

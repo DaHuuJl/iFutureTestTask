@@ -1,0 +1,48 @@
+version: '3'
+
+services:
+
+  server:
+    container_name: ServerApp
+    image: server:1.0.0
+    build: ./src/main/bank-server
+    ports:
+      - "8765:8765"
+    environment:
+      SERVER_PORT: 8765
+      SPRING_DATASOURCE_URL: jdbc:postgresql://db:5432/ifuture
+      SPRING_DATASOURCE_USERNAME: ifuture
+      SPRING_DATASOURCE_PASSWORD: ifuture
+      ANALYTICS_TIME: 10000
+    depends_on:
+      - db
+
+  client:
+    container_name: ClientApp
+    image: client:1.0.0
+    build: ./src/main/bank-client
+    ports:
+      - "8761:8761"
+    environment:
+      SERVER_PORT: 8761
+      ACCOUNT_READ_LIST: 100, 101, 102, 103
+#     ACCOUNT_READ_QUOTA: 0.25, 0.75, 0.25, 0.75
+      ACCOUNT_READ_QUOTA: 0.25
+      ACCOUNT_WRITE_LIST: 100, 101, 102, 103
+#      ACCOUNT_WRITE_QUOTA: 0.75, 0.25, 0.75, 0.25
+      ACCOUNT_WRITE_QUOTA: 0.75
+      CLIENT_THREAD_COUNT: 4
+#       CLIENT_THREAD_SAME_QUOTA: false
+      CLIENT_THREAD_SAME_QUOTA: true
+      BANK_SERVER_PORT: 8765
+    depends_on:
+      - server
+
+  db:
+    container_name: Postgres
+    image: postgres:13
+    restart: always
+    environment:
+      POSTGRES_USER: ifuture
+      POSTGRES_PASSWORD: ifuture
+      POSTGRES_DB: ifuture
