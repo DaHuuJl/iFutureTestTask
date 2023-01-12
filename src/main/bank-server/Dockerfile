@@ -1,4 +1,19 @@
-FROM adoptopenjdk/openjdk11:alpine-jre
-ARG JAR_FILE=target/bank-server.jar
-COPY ${JAR_FILE} app.jar
-ENTRYPOINT ["java","-jar","app.jar","--spring.profiles.active=docker"]
+#
+# Build stage
+#
+FROM public.ecr.aws/docker/library/maven:3.8.6-amazoncorretto-17 AS build
+
+ARG PATH_TO_APP=/home/app
+COPY /src ${PATH_TO_APP}/src
+COPY /pom.xml ${PATH_TO_APP}
+
+RUN mvn -f ${PATH_TO_APP}/pom.xml clean install
+
+#
+# Package stage
+#
+FROM amazoncorretto:11-alpine-jdk
+
+COPY --from=build /home/app/target/bank-server.jar /usr/local/lib/app.jar
+
+ENTRYPOINT ["java", "-jar", "/usr/local/lib/app.jar", "--spring.profiles.active=docker"]

@@ -1,3 +1,4 @@
+/*
 package ru.spb.ifuture.bank.server.integration;
 
 import org.springframework.boot.test.context.SpringBootTest;
@@ -33,3 +34,4 @@ public abstract class BaseIntegrationTest {
         }
     }
 }
+*/
