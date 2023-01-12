@@ -15,15 +15,16 @@ public class AccountController {
 
     @GetMapping("{id}/getBalance/")
     public ResponseEntity<Long> getBalance(@PathVariable Long id) {
+        final Long amount = balanceService.getBalance(id).orElseThrow(
+                () -> new RuntimeException(String.format("Счёт с id: %d не найден!", id)));
         Analytics.countMethodCallsGetBalance++;
-        return ResponseEntity.ok(balanceService.getBalance(id).orElseThrow(
-                () -> new RuntimeException(String.format("Счёт с id: %d не найден!", id))));
+        return ResponseEntity.ok(amount);
     }
 
     @GetMapping("{id}/changeBalance/{amount}")
     public ResponseEntity<?> changeBalance(@PathVariable Long id, @PathVariable Long amount) {
-        Analytics.countMethodCallsChangeBalance++;
         balanceService.changeBalance(id, amount);
+        Analytics.countMethodCallsChangeBalance++;
         return ResponseEntity.ok().build();
     }
 }
