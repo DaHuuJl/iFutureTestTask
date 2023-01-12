@@ -71,7 +71,7 @@ interface BalanceService {
 
 `CLIENT_THREAD_SAME_QUOTA` - если это флаг принимает значение `true`, то для всех клиентов устанавливается одинаковая
 вероятность, а если `false` - то для каждого клиента нужно задать свою вероятность (так же программа упадёт, если
-при значении `false` количество элементов в `ACCOUNT_READ_QUOTA` и `ACCOUNT_WRITE_QUOTA` не равны `CLIENT_THREAD_COUNT`)
+при значении `false` количество элементов в `ACCOUNT_READ_QUOTA` или `ACCOUNT_WRITE_QUOTA` не равны `CLIENT_THREAD_COUNT`)
 
 `BANK_SERVER_PORT` - порт localhost на котором запущен клиент
 
