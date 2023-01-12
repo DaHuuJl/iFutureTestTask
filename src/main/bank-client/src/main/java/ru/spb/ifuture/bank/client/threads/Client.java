@@ -31,18 +31,34 @@ public class Client extends Thread {
     }
 
     private void getBalance(int id) {
-        client.get()
-                .uri(String.format("http://localhost:%d/api/accounts/%d/getBalance/", port, id))
-                .retrieve()
-                .toBodilessEntity()
-                .block();
+        try {
+            client.get()
+                    .uri(String.format("http://localhost:%d/api/accounts/%d/getBalance/", port, id))
+                    .retrieve()
+                    .toBodilessEntity()
+                    .block();
+        } catch (Exception e) {
+            try {
+                sleep(3000);
+            } catch (InterruptedException ex) {
+                throw new RuntimeException(ex);
+            }
+        }
     }
 
     private void changeBalance(int id, long amount) {
+        try {
         client.get()
                 .uri(String.format("http://localhost:%d/api/accounts/%d/changeBalance/%d", port, id, amount))
                 .retrieve()
                 .toBodilessEntity()
                 .block();
+        } catch (Exception e) {
+            try {
+                sleep(3000);
+            } catch (InterruptedException ex) {
+                throw new RuntimeException(ex);
+            }
+        }
     }
 }
