@@ -75,7 +75,8 @@ interface BalanceService {
 
 `BANK_SERVER_PORT` - порт localhost на котором запущен клиент
 
-`ANALYTICS_TIME` - 
+`ANALYTICS_TIME` - время за которое выводится аналитика в мс 
+(например, если `ANALYTICS_TIME=10000`, интервал между логами будет 10 секунд)
 
 
 ## Запуск через Docker
